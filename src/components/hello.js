@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Hello = () => {
-  return <div>こんにちは、坂本龍馬さん</div>
+const Hello = (props) => {
+  return <div>こんにちは、{props.name || '坂本龍馬'}さん</div>
 }
 
 export default Hello

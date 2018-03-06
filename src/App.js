@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ReactApp from './components/reactApp'
+import ReactApp from './react-components/reactApp'
 import reduxFlow from './redux-flow'
 
 

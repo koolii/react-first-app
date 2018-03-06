@@ -44,6 +44,7 @@ function ReactReduxTodoApp({ store }) {
   const { task, tasks } = store.getState()
   return (
     <div>
+      <h2>ReactReduxTodoApp(AllInOne)</h2>
       <input type="text" onChange={(e) => store.dispatch(inputTask(e.target.value))} />
       <input type="button" value="add" onClick={() => { store.dispatch(addTask(task)) }} />
       <ul>

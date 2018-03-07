@@ -7,9 +7,8 @@ import ReactReduxTodoApp from './components/TodoAppForNoReactReduxModule'
 // react-reduxモジュール無しで、マニュアルでReactとReduxをあわせている
 
 function renderApp(store) {
-  const state = store.getState()
   ReactDOM.render(
-    <ReactReduxTodoApp store={store.getState()} />,
+    <ReactReduxTodoApp store={store} />,
     document.getElementById('react_redux_separate_root')
   )
 }

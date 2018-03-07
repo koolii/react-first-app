@@ -1,13 +1,13 @@
 import React from 'react'
-import { inputTask, addTask } from '../actions/tasks'
 
-export default function ReactReduxTodoApp({ store }) {
-  const { task, tasks } = store.getState()
+// containersでStoreから必要な項目を作成し、このコンポーネントに渡されてくる
+// そのためコンポーネントでは、ただ、渡されたPropsを利用するだけで良い
+export default function ReactReduxTodoApp({ task, tasks, inputTask, addTask, name = 'react-redux' }) {
   return (
     <div>
-      <h2>ReactReduxTodoApp(separated)</h2>
-      <input type="text" onChange={(e) => store.dispatch(inputTask(e.target.value))} />
-      <input type="button" value="add" onClick={() => { store.dispatch(addTask(task)) }} />
+      <h2>ReactReduxTodoApp(uses `{name}` module)</h2>
+      <input type="text" onChange={(e) => inputTask(e.target.value)} />
+      <input type="button" value="add" onClick={() => { addTask(task) }} />
       <ul>
         {
           tasks.map((item, i) => {

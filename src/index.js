@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import RectReduxTodoApp from './react-redux'
+import ReactReduxManual from './react-redux-all-in-one'
+import ReactReduxNpm from './react-redux'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

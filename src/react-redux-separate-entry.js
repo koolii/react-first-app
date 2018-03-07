@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
 import taskReducer from './reducers/tasks'
-import ReactReduxTodoApp from './components/TodoApp'
+import ReactReduxTodoApp from './components/TodoAppForNoReactReduxModule'
 
 // react-reduxモジュール無しで、マニュアルでReactとReduxをあわせている
 
 function renderApp(store) {
+  const state = store.getState()
   ReactDOM.render(
-    <ReactReduxTodoApp store={store} />,
+    <ReactReduxTodoApp store={store.getState()} />,
     document.getElementById('react_redux_separate_root')
   )
 }

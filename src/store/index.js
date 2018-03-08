@@ -4,9 +4,19 @@ import {
   applyMiddleware
 } from 'redux'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
+// logger自体を使ってReduxMiddlewareに使うことも出来るが、createLoggerで独自設定をしたものを適用することもできる
+// import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import tasksReducer from '../reducers/tasks'
 
+const logger = createLogger({
+  // タスクの入力は一文字を入力するだけでログがでてウルサイのでスルー
+  predicate: (getState, action) => !['HIGH_FREQUENCY_ACTION', 'INPUT_TASK'].includes(action.type)
+})
+
 export default function createStore(history) {
+  // reduxモジュールのcreateStore()は第二引数に初期stateの状態を渡すことが出来る（この時の第三引数がapplyMiddleware()）
+  // createStore()が内部で引数の数で処理を区別してくれてる
   return reduxCreateStore(
     combineReducers({
       // tasksReducerをtasksと言うkeyに割り当てる
@@ -14,10 +24,15 @@ export default function createStore(history) {
       // ルータ用のReducer(react-router-redux)
       router: routerReducer,
     }),
+    // applyMiddleware()関数は可変長引数を受け付けて、ReduxMiddlewareを読み込ませることが出来る
     applyMiddleware(
       // ルータ用のMiddleware(react-router-redux)
       // Action経由でルーティングの制御が可能になる
-      routerMiddleware(history)
+      // https://github.com/evgenyrodionov/redux-logger#options
+      // ↑のリンクで結構詳細な設定をすることができてカスタマイズできる
+      routerMiddleware(history),
+      // redux-logger
+      logger,
     )
   )
 }

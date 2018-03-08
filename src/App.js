@@ -14,6 +14,7 @@ export default class App extends Component {
     return (
       <div>
         <ReactApp />
+        <span>thunkとはIT業界では「必要になった時に処理をする」意味らしい</span>
       </div>
     )
   }

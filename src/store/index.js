@@ -8,15 +8,19 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 // import logger from 'redux-logger'
 import { createLogger } from 'redux-logger'
 import tasksReducer from '../reducers/tasks'
+import logger from '../middleware/logger'
 
-const logger = createLogger({
-  // タスクの入力は一文字を入力するだけでログがでてウルサイのでスルー
-  predicate: (getState, action) => !['HIGH_FREQUENCY_ACTION', 'INPUT_TASK'].includes(action.type)
-})
+// redux-logger
+// const logger = createLogger({
+//   // タスクの入力は一文字を入力するだけでログがでてウルサイのでスルー
+//   predicate: (getState, action) => !['HIGH_FREQUENCY_ACTION', 'INPUT_TASK'].includes(action.type)
+// })
 
 export default function createStore(history) {
   // reduxモジュールのcreateStore()は第二引数に初期stateの状態を渡すことが出来る（この時の第三引数がapplyMiddleware()）
   // createStore()が内部で引数の数で処理を区別してくれてる
+  // applyMiddleware()はenhancerと呼ばれてサードパーティでも色々と拡張機能がある
+  // それらをcombineReducers()みたいにreduxモジュールのcompose関数を使って１つにまとめる
   return reduxCreateStore(
     combineReducers({
       // tasksReducerをtasksと言うkeyに割り当てる
@@ -31,7 +35,6 @@ export default function createStore(history) {
       // https://github.com/evgenyrodionov/redux-logger#options
       // ↑のリンクで結構詳細な設定をすることができてカスタマイズできる
       routerMiddleware(history),
-      // redux-logger
       logger,
     )
   )

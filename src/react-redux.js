@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import { Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 import createStore from './store'
 import TodoAppContainer from './containers/TodoApp'
+import Error from './components/Error'
 
 // react-reduxというnpmモジュールを使ってTodoAppを実装する
 
@@ -15,7 +17,10 @@ const store = createStore(history)
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <TodoAppContainer />
+      <div>
+        <Route exact path="/" component={TodoAppContainer}  />
+        <Route exact path="/error" component={Error}  />
+      </div>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('react_redux_m_root')

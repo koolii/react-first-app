@@ -6,6 +6,8 @@ import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import Input from 'material-ui/Input'
 import List, { ListItem, ListItemText } from 'material-ui/List'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import './TodoApp.css'
 
 // webpack, css-loader, style-loaderを使うと一般的には出来ないCSSのimportも可能になる
 // => create-react-appは標準で設定がされている
@@ -33,17 +35,19 @@ export default function ReactReduxTodoApp({ task, tasks, inputTask, addTask, red
       </AppBar>
       <div style={{ padding: '16px' }}>
         <Input onChange={(e) => inputTask(e.target.value)} />
-        <Button raised color="secondary" onClick={() => { addTask(task) }}>add</Button>
+        <Button color="secondary" onClick={() => { addTask(task) }}>add</Button>
         <List>
+          <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={300}>
           {
             tasks.map((item, i) => {
               return (
                 <ListItem key={i}>
-                  <ListItemText primary={`${item}`} />
+                  <ListItemText primary={`・${item}`} />
                 </ListItem>
               )
             })
           }
+          </ReactCSSTransitionGroup>
         </List>
         <button onClick={() => redirectToError()}>go to error page</button>
       </div>

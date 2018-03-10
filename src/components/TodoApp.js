@@ -1,4 +1,11 @@
 import React from 'react'
+import Reboot from 'material-ui/Reboot'
+import AppBar from 'material-ui/AppBar'
+import Toolbar from 'material-ui/Toolbar'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import Input from 'material-ui/Input'
+import List, { ListItem, ListItemText } from 'material-ui/List'
 
 // webpack, css-loader, style-loaderを使うと一般的には出来ないCSSのimportも可能になる
 // => create-react-appは標準で設定がされている
@@ -16,19 +23,30 @@ const style = {
 export default function ReactReduxTodoApp({ task, tasks, inputTask, addTask, redirectToError }) {
   return (
     <div>
-      <h2>ReactReduxTodoApp(uses `react-redux` module)</h2>
-      <input type="text" style={style} onChange={(e) => inputTask(e.target.value)} />
-      <input type="button" value="add" onClick={() => { addTask(task) }} />
-      <ul>
-        {
-          tasks.map((item, i) => {
-            return (
-              <li key={i}>{item}</li>
-            )
-          })
-        }
-      </ul>
-      <button onClick={() => redirectToError()}>go to error page</button>
+      <Reboot />
+      <AppBar position="static">
+        <Toolbar>
+          <Typography type="title" color="inherit">
+            Todo
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div style={{ padding: '16px' }}>
+        <Input onChange={(e) => inputTask(e.target.value)} />
+        <Button raised color="secondary" onClick={() => { addTask(task) }}>add</Button>
+        <List>
+          {
+            tasks.map((item, i) => {
+              return (
+                <ListItem key={i}>
+                  <ListItemText primary={`${item}`} />
+                </ListItem>
+              )
+            })
+          }
+        </List>
+        <button onClick={() => redirectToError()}>go to error page</button>
+      </div>
     </div>
   )
 }

@@ -13,13 +13,23 @@ export default class App extends Component {
       ],
       uniqueId: 2,
     }
+
+    // stateがここにあるので、ここでイベントを宣言し、下位のコンポーネントにイベントを渡す
+    this.addTodo.bind(this)
+  }
+
+  // 登録用のイベントだけ登録しておく
+  addTodo(title) {
+    const { tasks, uniqueId } = this.state
+    tasks.push({ title, id: uniqueId })
+    this.setState({ tasks, uniqueId: uniqueId + 1 })
   }
 
   render() {
     return (
       <div>
         <h1>Simple Todo Application</h1>
-        <TodoInput />
+        <TodoInput addTodo={this.addTodo} />
         <TodoList tasks={this.state.tasks} />
       </div>
     )

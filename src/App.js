@@ -15,7 +15,8 @@ export default class App extends Component {
     }
 
     // stateがここにあるので、ここでイベントを宣言し、下位のコンポーネントにイベントを渡す
-    this.addTodo.bind(this)
+    this.addTodo = this.addTodo.bind(this)
+    this.delete = this.delete.bind(this)
   }
 
   // 登録用のイベントだけ登録しておく

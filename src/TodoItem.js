@@ -8,7 +8,7 @@ function TodoItem(props) {
   console.log(props)
   console.log(JSON.stringify(props))
   return (
-    <li style={style} show-id={props.id} >
+    <li style={style} show-id={props.id} onClick={() => { props.delete(props.id) }}>
       {props.title}
     </li>
   )

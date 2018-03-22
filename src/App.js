@@ -26,12 +26,19 @@ export default class App extends Component {
     this.setState({ tasks, uniqueId: uniqueId + 1 })
   }
 
+  delete(id) {
+    const { tasks } = this.state
+    this.setState({
+      tasks: tasks.filter((todo) => (todo.id !== id))
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Simple Todo Application</h1>
         <TodoInput addTodo={this.addTodo} />
-        <TodoList tasks={this.state.tasks} />
+        <TodoList tasks={this.state.tasks} delete={this.delete} />
       </div>
     )
   }

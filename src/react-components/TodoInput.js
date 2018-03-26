@@ -11,7 +11,8 @@ export default class TodoInput extends Component {
     }
   }
 
-  handleClick() {
+  handleClick(e) {
+    e.preventDefault()
     this.props.addTodo(this.state.inputValue)
     this.setState({
       inputValue: ''

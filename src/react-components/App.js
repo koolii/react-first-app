@@ -17,13 +17,22 @@ export default class App extends Component {
     // stateがここにあるので、ここでイベントを宣言し、下位のコンポーネントにイベントを渡す
     this.addTodo = this.addTodo.bind(this)
     this.delete = this.delete.bind(this)
+    this.resetTodo = this.resetTodo.bind(this)
   }
 
   // 登録用のイベントだけ登録しておく
   addTodo(title) {
-    const { tasks, uniqueId } = this.state
-    tasks.push({ title, id: uniqueId })
-    this.setState({ tasks, uniqueId: uniqueId + 1 })
+    if (title) {
+      const { tasks, uniqueId } = this.state
+      tasks.push({ title, id: uniqueId })
+      this.setState({ tasks, uniqueId: uniqueId + 1 })
+    }
+  }
+
+  resetTodo() {
+    this.setState({
+      tasks: [],
+    })
   }
 
   delete(id) {
@@ -37,6 +46,7 @@ export default class App extends Component {
     return (
       <div>
         <h1>Simple Todo Application</h1>
+        <button onClick={this.resetTodo}>Reset</button>
         <TodoInput addTodo={this.addTodo} />
         <TodoList tasks={this.state.tasks} delete={this.delete} />
       </div>

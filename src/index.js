@@ -11,10 +11,14 @@ const addTask = (task) => ({
     task,
   },
 })
+const resetTask = () => ({
+  type: 'RESET_TASK',
+  payload: {},
+})
 
 // reducer
-function taskReducer(state = initialState, action) {
-  console.log('coming reducer taskReducer')
+function addReducer(state = initialState, action) {
+  console.log('coming reducer addReducer')
   switch (action.type) {
     case 'ADD_TASK':
       return {
@@ -25,19 +29,34 @@ function taskReducer(state = initialState, action) {
       return state
   }
 }
-
-function handleChange() {
-  console.log('coming subscribe event')
-  console.log(store.getState())
+function resetReducer(state = initialState, action) {
+  console.log('coming reducer resetReducer')
+  switch (action.type) {
+    case 'RESET_TASK':
+      return {
+        ...state,
+        tasks: [],
+      }
+    default:
+    return state
+  }
 }
 
-const store = createStore(taskReducer)
+// function handleChange() {
+//   console.log('coming subscribe event')
+//   console.log(store.getState())
+// }
+
+const store = createStore(addReducer)
 
 // 忘れてしまっていたが、このsubscribeはreact-reduxというライブラリが
 // ラップしているから意識せず使用していることになる
-const unsubscribe = store.subscribe(handleChange)
-
+// const unsubscribe = store.subscribe(handleChange)
 store.dispatch(addTask('store learning'))
+console.log(JSON.stringify(store.getState()))
 
-// 4.2章からスタート
-// ReactDOM.render(<App />, document.getElementById('root'));
+
+store.replaceReducer(resetReducer)
+store.dispatch(resetTask())
+console.log(JSON.stringify(store.getState()))
+

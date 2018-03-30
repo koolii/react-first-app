@@ -2,12 +2,13 @@ import { connect } from 'react-redux'
 import TodoApp from '../components/TodoApp'
 import { inputTask, addTask } from '../actions/tasks'
 
-function mapStateToProps({ task, tasks }) {
-  console.log(`task: ${task}`)
-  console.log(`tasks: ${tasks}`)
+// combineReducers()を実行する前はtasksと言うキーオブジェクトにマッピングされていない
+// function mapStateToProps({ task, tasks }) {
+function mapStateToProps({ tasks }) {
+  console.log(`tasks-reducer: ${JSON.stringify(tasks)}`)
   return {
-    task,
-    tasks,
+    task: tasks.task,
+    tasks: tasks.tasks,
   }
 }
 

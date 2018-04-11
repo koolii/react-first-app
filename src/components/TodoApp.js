@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function TodoApp(props) {
   const { task, tasks, inputTask, addTask, redirectToError } = props
-  console.log(`TodoApp Component Props ${JSON.stringify(props)}`)
+  // console.log(`TodoApp Component Props ${JSON.stringify(props)}`)
 
   return (
     <div>

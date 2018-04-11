@@ -6,7 +6,7 @@ import { inputTask, addTask } from '../actions/tasks'
 // combineReducers()を実行する前はtasksと言うキーオブジェクトにマッピングされていない
 // function mapStateToProps({ task, tasks }) {
 function mapStateToProps({ tasks }) {
-  console.log(`tasks-reducer: ${JSON.stringify(tasks)}`)
+  // console.log(`tasks-reducer: ${JSON.stringify(tasks)}`)
   return {
     task: tasks.task,
     tasks: tasks.tasks,

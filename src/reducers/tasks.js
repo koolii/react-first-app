@@ -4,7 +4,7 @@ const initialState = {
 }
 
 export default function taskReducer(state = initialState, action) {
-  console.log(`Reducer(task) state: ${JSON.stringify(state)}, action: ${JSON.stringify(action)}`)
+  // console.log(`Reducer(task) state: ${JSON.stringify(state)}, action: ${JSON.stringify(action)}`)
   switch (action.type) {
     case 'INPUT_TASK':
       return {
